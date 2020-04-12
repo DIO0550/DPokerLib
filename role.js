@@ -60,7 +60,11 @@ function sortHand(hand) {
  * ロイヤルストレートフラッシュ
  */
 function isRoyalFlush(hand) {
+    if (!isFlush(hand)) {
+        return false
+    }
 
+    
 }
 
 /**
@@ -74,14 +78,26 @@ function isStraightFlush(hand) {
  * フォーカード
  */
 function isFourCard(hand) {
-    
+    let sortHand = sortHand()
+    // TODO: ジョーカーを考慮
+    let result = ((sortHand[0].number == sortHand[1].number == sortHand[2].number == sortHand[3].number) || 
+                  (sortHand[1].number == sortHand[2].number == sortHand[3].number == sortHand[4].number))
+
+    return result
 }
 
 /**
  * フルハウス
  */
 function isFullHause(hand) {
+    let sortHand = sortHand()
 
+    // TODO: ジョーカーを考慮
+
+    let result = ((sortHand[0].number == sortHand[1].number == sortHand[2].number && sortHand[3].number == sortHand[4].number) || 
+                  (sortHand[0].number == sortHand[1].number && sortHand[2].number == sortHand[3].number == sortHand[4].number))
+
+    return result
 }
 
 /**
@@ -92,6 +108,10 @@ function isFlush(hand) {
 
     for (var i = 1; i < HAND_COUNT; i++) {
         let card = hand[i]
+        if (card.mark == CARD_MARK.JOKER || mark == CARD_MARK.JOKER) {
+            continue
+        }
+
         if (card.mark != mark) {
             return false
         }
@@ -126,12 +146,31 @@ function isStraight(hand) {
  * スリーカード
  */
 function isThreeCard(hand) {
-    
+    let sortHand = sortHand()
+    for (var i = 0; i < 3; i++) {
+        let startIndex = i
+        let firstNumber = sortHand[i].number
+        for (var j = startIndex + 1; j < startIndex + 2; j++) {
+            let card = sortHand[i]
+            if (firstNumber != card.number) {
+                break
+            }
+            return true
+        }
+    }
+
+    return false;
 }
 
 /**
  * ツーペア
  */
 function isTwoPair(hand) {
+    let sortHand = sortHand()
 
+    // TODO ジョーカー2枚なら、ツーペアは確定 
+
+    let result = (sortHand[0] == sortHand[1] && sortHand[2] == sortHand[3]) || (sortHand[1] == sortHand[2] && sortHand[3] == sortHand[4])
+
+    return result
 }
