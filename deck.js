@@ -1,16 +1,22 @@
-import { Card, CARD_MARK, JOKER_CARD_NUMBER } from "card.js"
+import { Card, CARD_MARK, JOKER_CARD_NUMBER } from "./card.js"
 
-export var Deck = function() {
-    this.deckCards = createDeckCards()
+export var Deck = (function() {
+
+    var Deck = function() {
+        this.deckCards = createDeckCards()
+    }
+
+    var prototype = Deck.prototype;
 
     /**
      * draw one
      */
-    function drawOne() {
+    prototype.drawOne = function() {
         return this.deckCards.shift()
     }
 
-}
+    return Deck
+})()
 
 /**
  * create deck
@@ -21,7 +27,7 @@ function createDeckCards() {
     Array.prototype.push.apply(deckCards, createCards(CARD_MARK.HEART))
     Array.prototype.push.apply(deckCards, createCards(CARD_MARK.DIAMOND))
     Array.prototype.push.apply(deckCards, createCards(CARD_MARK.CLUB))
-    Array.prototype.push.apply(deckCards, createJocker)
+    Array.prototype.push.apply(deckCards, createJocker())
 
     // 山札をシャッフル
     var length = deckCards.length;
