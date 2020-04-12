@@ -1,4 +1,4 @@
-import { Card, CARD_MARK, JOKER_CARD_NUMBER, HAND_COUNT } from "card.js"
+import { Card, CARD_MARK, JOKER_CARD_NUMBER, HAND_COUNT } from "./card.js"
 
 const ROLE_LIST = {
     ROYAL_FLUSH: "ロイヤルストレートフラッシュ",
@@ -78,7 +78,7 @@ function isStraightFlush(hand) {
  * フォーカード
  */
 function isFourCard(hand) {
-    let sortHand = sortHand()
+    let sortHand = sortHand(hand)
     // TODO: ジョーカーを考慮
     let result = ((sortHand[0].number == sortHand[1].number == sortHand[2].number == sortHand[3].number) || 
                   (sortHand[1].number == sortHand[2].number == sortHand[3].number == sortHand[4].number))
@@ -90,7 +90,7 @@ function isFourCard(hand) {
  * フルハウス
  */
 function isFullHause(hand) {
-    let sortHand = sortHand()
+    let sortHand = sortHand(hand)
 
     // TODO: ジョーカーを考慮
 
@@ -124,7 +124,7 @@ function isFlush(hand) {
  * ストレート
  */
 function isStraight(hand) {
-    let sortHand = sortHand()
+    let sortHand = sortHand(hand)
     let firstNumber = sortHand[0]
 
     let next = (firstNumber + 1)
@@ -146,7 +146,7 @@ function isStraight(hand) {
  * スリーカード
  */
 function isThreeCard(hand) {
-    let sortHand = sortHand()
+    let sortHand = sortHand(hand)
     for (var i = 0; i < 3; i++) {
         let startIndex = i
         let firstNumber = sortHand[i].number
@@ -166,7 +166,7 @@ function isThreeCard(hand) {
  * ツーペア
  */
 function isTwoPair(hand) {
-    let sortHand = sortHand()
+    let sortHand = sortHand(hand)
 
     // TODO ジョーカー2枚なら、ツーペアは確定 
 
