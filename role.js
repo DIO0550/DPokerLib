@@ -2,6 +2,9 @@ import { Card, CARD_MARK, JOKER_CARD_NUMBER } from "./card.js"
 
 export const HAND_COUNT = 5
 
+/**
+ * ROLE LIST
+ */
 const ROLE_LIST = {
     ROYAL_FLUSH: "ROYAL_FLUSH",
     FIVE_CARD: "FIVE_CARD",
@@ -16,9 +19,18 @@ const ROLE_LIST = {
     HIGH_CARD: "HIGH_CARD"
 }
 
+/**
+ * ROLE
+ * 
+ * return HAND ROLE
+ */
 export function role(hand) {
     if (isRoyalFlush(hand)) {
         return ROLE_LIST.ROYAL_FLUSH
+    }
+
+    if (isFiveCard(hand)) {
+        return ROLE_LIST.FIVE_CARD
     }
 
     if (isStraightFlush(hand)) {
@@ -56,62 +68,80 @@ export function role(hand) {
     return ROLE_LIST.HIGH_CARD
 }
 
+/**
+ * compare card number 
+ */
 function compareNumber(obj1, obj2) {
     return obj1.number < obj2.number
 }
 
+/**
+ * sort hand
+ */
 function sortHand(hand) {
-    let handCopy = Object.assign({}, hand);
+    let handCopy = [];
+    Object.assign(handCopy , hand);
     handCopy.sort(compareNumber)
     return handCopy
 }
 
 /**
- * ロイヤルストレートフラッシュ
+ * RoyalFlush
  */
 function isRoyalFlush(hand) {
-    if (!isFlush(hand)) {
+    if (!isStraight(hand)) {
         return false
     }
+    let sortedHand = sortHand(hand)
+    // Do not consider jokers
+    let result =  (sortedHand[0].number == "1" || sortedHand[1].number == "10" || sortedHand[2].number == "11" || 
+                   sortedHand[3].number == "12" || sortedHand[4].number == "13")
+    return result
 
-    
 }
 
 /**
- * ストレートフラッシュ
+ * FiveCard
+ */
+function isFiveCard(hand) {
+    let sortedHand = sortHand(hand)
+}
+
+/**
+ * Straight Flush
  */
 function isStraightFlush(hand) {
     return isStraight(hand) && isFlush(hand)
 }
 
 /**
- * フォーカード
+ * Four Card
  */
 function isFourCard(hand) {
-    let sortHand = sortHand(hand)
+    let sortedHand = sortHand(hand)
     // TODO: ジョーカーを考慮
-    let result = ((sortHand[0].number == sortHand[1].number == sortHand[2].number == sortHand[3].number) || 
-                  (sortHand[1].number == sortHand[2].number == sortHand[3].number == sortHand[4].number))
+    let result = ((sortedHand[0].number == sortedHand[1].number == sortedHand[2].number == sortedHand[3].number) || 
+                  (sortedHand[1].number == sortedHand[2].number == sortedHand[3].number == sortedHand[4].number))
 
     return result
 }
 
 /**
- * フルハウス
+ * Full Hause
  */
 function isFullHause(hand) {
-    let sortHand = sortHand(hand)
+    let sortedHand = sortHand(hand)
 
     // TODO: ジョーカーを考慮
 
-    let result = ((sortHand[0].number == sortHand[1].number == sortHand[2].number && sortHand[3].number == sortHand[4].number) || 
-                  (sortHand[0].number == sortHand[1].number && sortHand[2].number == sortHand[3].number == sortHand[4].number))
+    let result = ((sortedHand[0].number == sortedHand[1].number == sortedHand[2].number && sortedHand[3].number == sortedHand[4].number) || 
+                  (sortedHand[0].number == sortedHand[1].number && sortedHand[2].number == sortedHand[3].number == sortedHand[4].number))
 
     return result
 }
 
 /**
- * フラッシュ
+ * Flush
  */
 function isFlush(hand) {
     let mark = hand[0]
@@ -131,11 +161,11 @@ function isFlush(hand) {
 }
 
 /**
- * ストレート
+ * Straight
  */
 function isStraight(hand) {
-    let sortHand = sortHand(hand)
-    let firstNumber = sortHand[0]
+    let sortedHand = sortHand(hand)
+    let firstNumber = sortedHand[0]
 
     let next = (firstNumber + 1)
     if (firstNumber == 1) {
@@ -153,15 +183,15 @@ function isStraight(hand) {
 }
 
 /**
- * スリーカード
+ * Three Card
  */
 function isThreeCard(hand) {
-    let sortHand = sortHand(hand)
+    let sortedHand = sortHand(hand)
     for (var i = 0; i < 3; i++) {
         let startIndex = i
-        let firstNumber = sortHand[i].number
+        let firstNumber = sortedHand[i].number
         for (var j = startIndex + 1; j < startIndex + 2; j++) {
-            let card = sortHand[i]
+            let card = sortedHand[i]
             if (firstNumber != card.number) {
                 break
             }
@@ -173,18 +203,21 @@ function isThreeCard(hand) {
 }
 
 /**
- * ツーペア
+ * Two Pair
  */
 function isTwoPair(hand) {
     let sortHand = sortHand(hand)
 
     // TODO ジョーカー2枚なら、ツーペアは確定 
 
-    let result = (sortHand[0] == sortHand[1] && sortHand[2] == sortHand[3]) || (sortHand[1] == sortHand[2] && sortHand[3] == sortHand[4])
+    let result = (sortedHand[0] == sortedHand[1] && sortedHand[2] == sortedHand[3]) || (sortedHand[1] == sortedHand[2] && sortedHand[3] == sortedHand[4])
 
     return result
 }
 
+/**
+ * One Pair
+ */
 function isOnePair(hand) {
     return false
 }
