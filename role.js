@@ -1,15 +1,19 @@
-import { Card, CARD_MARK, JOKER_CARD_NUMBER, HAND_COUNT } from "./card.js"
+import { Card, CARD_MARK, JOKER_CARD_NUMBER } from "./card.js"
+
+export const HAND_COUNT = 5
 
 const ROLE_LIST = {
-    ROYAL_FLUSH: "ロイヤルストレートフラッシュ",
-    STRATIGHT_FLUSH: "ストレートフラッシュ",
-    FOUR_CARD: "フォーカード",
-    FULL_HAUSE: "フルハウス",
-    FLUSH: "フラッシュ",
-    STRAIGHT: "ストレート",
-    THREE_CARD: "スリーカード",
-    TWO_PAIR: "ツーペア",
-    HIGH_CARD: "役なし"
+    ROYAL_FLUSH: "ROYAL_FLUSH",
+    FIVE_CARD: "FIVE_CARD",
+    STRATIGHT_FLUSH: "STRATIGHT_FLUSH",
+    FOUR_CARD: "FOUR_CARD",
+    FULL_HAUSE: "FULL_HAUSE",
+    FLUSH: "FLUSH",
+    STRAIGHT: "STRAIGHT",
+    THREE_CARD: "THREE_CARD",
+    TWO_PAIR: "TWO_PAIR",
+    ONE_PAIRE: "ONE_PAIRE",
+    HIGH_CARD: "HIGH_CARD"
 }
 
 export function role(hand) {
@@ -21,29 +25,35 @@ export function role(hand) {
         return ROLE_LIST.STRATIGHT_FLUSH
     }
 
-    if (isFourCard(card)) {
+    if (isFourCard(hand)) {
         return ROLE_LIST.FOUR_CARD
     }
 
-    if (isFullHause(card)) {
+    if (isFullHause(hand)) {
         return ROLE_LIST.FOUR_CARD
     } 
 
-    if (isFlush(card)) {
+    if (isFlush(hand)) {
         return ROLE_LIST.FLUSH
     }
 
-    if (isStraight(card)) {
+    if (isStraight(hand)) {
         return ROLE_LIST.STRAIGHT
     }
 
-    if (isThreeCard(card)) {
+    if (isThreeCard(hand)) {
         return ROLE_LIST.THREE_CARD
     }
 
-    if (isTwoPair(card)) {
+    if (isTwoPair(hand)) {
 
     }
+
+    if (isOnePair(hand)) {
+
+    }
+
+    return ROLE_LIST.HIGH_CARD
 }
 
 function compareNumber(obj1, obj2) {
@@ -173,4 +183,8 @@ function isTwoPair(hand) {
     let result = (sortHand[0] == sortHand[1] && sortHand[2] == sortHand[3]) || (sortHand[1] == sortHand[2] && sortHand[3] == sortHand[4])
 
     return result
+}
+
+function isOnePair(hand) {
+    return false
 }
