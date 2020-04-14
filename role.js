@@ -72,7 +72,9 @@ export function role(hand) {
  * compare card number 
  */
 function compareNumber(obj1, obj2) {
-    return obj1.number < obj2.number
+    if (obj1.number < obj2.number) return -1
+    if (obj1.number > obj2.number) return 1
+    return 0
 }
 
 /**
@@ -83,6 +85,19 @@ function sortHand(hand) {
     Object.assign(handCopy , hand);
     handCopy.sort(compareNumber)
     return handCopy
+}
+
+/**
+ * joker count
+ */
+function jokerCount(hand) {
+    let count = 0
+    for (var card of hand) {
+        if (card.number = JOKER_CARD_NUMBER) {
+            count++
+        }
+    }
+    return count
 }
 
 /**
@@ -187,6 +202,21 @@ function isStraight(hand) {
  */
 function isThreeCard(hand) {
     let sortedHand = sortHand(hand)
+    let jcount = jokerCount(hand)
+
+    if (jcount == 2) {
+        return true
+    }
+
+    if (jcount == 1) {
+        for (var i = 0; i < 4; i++) {
+            if (sortedHand[i] == sortedHand[i + 1]) {
+                return true
+            }
+        }
+        return false
+    }
+
     for (var i = 0; i < 3; i++) {
         let startIndex = i
         let firstNumber = sortedHand[i].number
@@ -206,11 +236,9 @@ function isThreeCard(hand) {
  * Two Pair
  */
 function isTwoPair(hand) {
-    let sortHand = sortHand(hand)
-
-    // TODO ジョーカー2枚なら、ツーペアは確定 
-
-    let result = (sortedHand[0] == sortedHand[1] && sortedHand[2] == sortedHand[3]) || (sortedHand[1] == sortedHand[2] && sortedHand[3] == sortedHand[4])
+    let sortedHand = sortHand(hand)
+    let result = (sortedHand[0].number == sortedHand[1].number && sortedHand[2].number == sortedHand[3].number) || 
+                 (sortedHand[1].number == sortedHand[2].number && sortedHand[3].number == sortedHand[4].number)
 
     return result
 }
