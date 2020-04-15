@@ -93,7 +93,7 @@ function sortHand(hand) {
 function jokerCount(hand) {
     let count = 0
     for (var card of hand) {
-        if (card.number = JOKER_CARD_NUMBER) {
+        if (card.number == JOKER_CARD_NUMBER) {
             count++
         }
     }
@@ -109,8 +109,8 @@ function isRoyalFlush(hand) {
     }
     let sortedHand = sortHand(hand)
     // Do not consider jokers
-    let result =  (sortedHand[0].number == "1" || sortedHand[1].number == "10" || sortedHand[2].number == "11" || 
-                   sortedHand[3].number == "12" || sortedHand[4].number == "13")
+    let result =  (sortedHand[0].number == 1  && sortedHand[1].number == 10 && sortedHand[2].number == "11" &&
+                   sortedHand[3].number == 12 && sortedHand[4].number == 13)
     return result
 
 }
@@ -135,8 +135,8 @@ function isStraightFlush(hand) {
 function isFourCard(hand) {
     let sortedHand = sortHand(hand)
     // TODO: ジョーカーを考慮
-    let result = ((sortedHand[0].number == sortedHand[1].number == sortedHand[2].number == sortedHand[3].number) || 
-                  (sortedHand[1].number == sortedHand[2].number == sortedHand[3].number == sortedHand[4].number))
+    let result = ((sortedHand[0].number == sortedHand[1].number && sortedHand[0].number == sortedHand[2].number && sortedHand[0].number == sortedHand[3].number) || 
+                  (sortedHand[1].number == sortedHand[2].number && sortedHand[1].number == sortedHand[3].number && sortedHand[1].number == sortedHand[4].number))
 
     return result
 }
@@ -146,11 +146,17 @@ function isFourCard(hand) {
  */
 function isFullHause(hand) {
     let sortedHand = sortHand(hand)
+    let jcount = jokerCount(hand)
+    if (jcount == 2) {
+        return ((sortedHand[2].number == sortedHand[3].number || sortedHand[3].numb == sortedHand[4].number)) 
+    }
 
-    // TODO: ジョーカーを考慮
+    if (jcount == 1) {
+        return isTwoPair(hand)
+    }
 
-    let result = ((sortedHand[0].number == sortedHand[1].number == sortedHand[2].number && sortedHand[3].number == sortedHand[4].number) || 
-                  (sortedHand[0].number == sortedHand[1].number && sortedHand[2].number == sortedHand[3].number == sortedHand[4].number))
+    let result = (((sortedHand[0].number == sortedHand[1].number && sortedHand[1].number == sortedHand[2].number) && sortedHand[3].number == sortedHand[4].number) || 
+                  ((sortedHand[0].number == sortedHand[1].number) && (sortedHand[2].number == sortedHand[3].number && sortedHand[2].number == sortedHand[4].number)))
 
     return result
 }
@@ -210,7 +216,7 @@ function isThreeCard(hand) {
 
     if (jcount == 1) {
         for (var i = 0; i < 4; i++) {
-            if (sortedHand[i] == sortedHand[i + 1]) {
+            if (sortedHand[i].number == sortedHand[i + 1].number) {
                 return true
             }
         }
@@ -218,13 +224,7 @@ function isThreeCard(hand) {
     }
 
     for (var i = 0; i < 3; i++) {
-        let startIndex = i
-        let firstNumber = sortedHand[i].number
-        for (var j = startIndex + 1; j < startIndex + 2; j++) {
-            let card = sortedHand[i]
-            if (firstNumber != card.number) {
-                break
-            }
+        if (sortedHand[i].number == sortedHand[i + 1].number && sortedHand[i].number == sortedHand[i + 2].number) {
             return true
         }
     }
@@ -237,8 +237,7 @@ function isThreeCard(hand) {
  */
 function isTwoPair(hand) {
     let sortedHand = sortHand(hand)
-    let result = (sortedHand[0].number == sortedHand[1].number && sortedHand[2].number == sortedHand[3].number) || 
-                 (sortedHand[1].number == sortedHand[2].number && sortedHand[3].number == sortedHand[4].number)
+    let result = (sortedHand[0].number == sortedHand[1].number && sortedHand[2].number == sortedHand[3].number) || (sortedHand[1].number == sortedHand[2].number && sortedHand[3].number == sortedHand[4].number)
 
     return result
 }
@@ -247,5 +246,6 @@ function isTwoPair(hand) {
  * One Pair
  */
 function isOnePair(hand) {
+
     return false
 }
