@@ -6,10 +6,85 @@ var rewire = require('rewire');
 var roleModule = rewire("../role.js")
 
 /**
+ * full hause test
+ */
+ describe("test role full hause", function() {
+    it("full hause no joker", function(){
+        let card1 = new Card(CARD_MARK.SPADE, 1)
+        let card2 = new Card(CARD_MARK.SPADE, 13) 
+        let card3 = new Card(CARD_MARK.HEART, 1)
+        let card4 = new Card(CARD_MARK.CLUB, 13)
+        let card5 = new Card(CARD_MARK.CLUB, 1)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isFullHause = roleModule.__get__("isFullHause")
+
+         assert.equal(isFullHause(hand), true)
+    });
+
+    it("full hause one joker", function(){
+        let card1 = new Card(CARD_MARK.SPADE, 6)
+        let card2 = new Card(CARD_MARK.SPADE, 13) 
+        let card3 = new Card(CARD_MARK.HEART, 6)
+        let card4 = new Card(CARD_MARK.CLUB, 13)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isFullHause = roleModule.__get__("isFullHause")
+
+         assert.equal(isFullHause(hand), true)
+    });
+
+    it("not full hause one joker", function(){
+        let card1 = new Card(CARD_MARK.SPADE, 1)
+        let card2 = new Card(CARD_MARK.SPADE, 1) 
+        let card3 = new Card(CARD_MARK.HEART, 13)
+        let card4 = new Card(CARD_MARK.CLUB, 3)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isFullHause = roleModule.__get__("isFullHause")
+
+         assert.equal(isFullHause(hand), false)
+    });
+    
+    it("full hause two joker", function(){
+        let card1 = new Card(CARD_MARK.SPADE, 10)
+        let card2 = new Card(CARD_MARK.DIAMOND, 10) 
+        let card3 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+        let card4 = new Card(CARD_MARK.HEART, 10)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isFullHause = roleModule.__get__("isFullHause")
+
+         assert.equal(isFullHause(hand), true)
+    });
+
+    it("full hause two joker", function(){
+        let card1 = new Card(CARD_MARK.SPADE, 9)
+        let card2 = new Card(CARD_MARK.DIAMOND, 10) 
+        let card3 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+        let card4 = new Card(CARD_MARK.HEART, 9)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isFullHause = roleModule.__get__("isFullHause")
+
+         assert.equal(isFullHause(hand), true)
+    });
+});
+
+/**
  * three card test
  */
 describe("test role three card", function() {
-    it("not three card no joker", function(){
+    it("three card no joker", function(){
         let card1 = new Card(CARD_MARK.SPADE, 3)
         let card2 = new Card(CARD_MARK.SPADE, 12) 
         let card3 = new Card(CARD_MARK.HEART, 3)
@@ -23,7 +98,7 @@ describe("test role three card", function() {
          assert.equal(isThreeCard(hand), true)
     });
 
-    it("not three card one joker", function(){
+    it("three card one joker", function(){
         let card1 = new Card(CARD_MARK.SPADE, 3)
         let card2 = new Card(CARD_MARK.SPADE, 12) 
         let card3 = new Card(CARD_MARK.HEART, 11)
@@ -37,7 +112,7 @@ describe("test role three card", function() {
          assert.equal(isThreeCard(hand), true)
     });
 
-    it("not three card two joker", function(){
+    it("three card two joker", function(){
         let card1 = new Card(CARD_MARK.SPADE, JOKER_CARD_NUMBER)
         let card2 = new Card(CARD_MARK.SPADE, 12) 
         let card3 = new Card(CARD_MARK.HEART, 11)
