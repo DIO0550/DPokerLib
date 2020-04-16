@@ -186,21 +186,29 @@ function isFlush(hand) {
  */
 function isStraight(hand) {
     let sortedHand = sortHand(hand)
-    let firstNumber = sortedHand[0]
+    // joker count 
+    let jCount = jokerCount(hand)
+    // next number 
+    let next = (sortedHand[jCount].number == 1) ? 10 : sortedHand[jCount].number + 1
 
-    let next = (firstNumber + 1)
-    if (firstNumber == 1) {
-        next = 10
-    }
+    // can miss count
+    let canMissCount = jCount;
+    // check index
+    let checkIndex = jCount + 1
+    while (checkIndex < HAND_COUNT) {
 
-     for (var i = 1; i < HAND_COUNT; i++) {
-        let card = hand[i]
-        if (card.number != next) {
+        let card = sortedHand[checkIndex]
+        if (card.number == next++) {
+            checkIndex++
+            continue
+        }
+
+        canMissCount--
+        if (canMissCount < 0) {
             return false
         }
-        next++
-     }
-     return true;
+    }
+    return true;
 }
 
 /**
