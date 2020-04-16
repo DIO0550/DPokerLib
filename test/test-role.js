@@ -128,6 +128,223 @@ describe("test role three card", function() {
 });
 
 /**
+ * straighttest
+ */
+describe("test role straight", function() {
+    it("straight no joker", function(){
+        let card1 = new Card(CARD_MARK.SPADE, 3)
+        let card2 = new Card(CARD_MARK.SPADE, 4) 
+        let card3 = new Card(CARD_MARK.HEART, 7)
+        let card4 = new Card(CARD_MARK.CLUB, 6)
+        let card5 = new Card(CARD_MARK.CLUB, 5)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isStraight = roleModule.__get__("isStraight")
+
+         assert.equal(isStraight(hand), true)
+    });
+
+    it("straight no joker 10 ~ 1", function(){
+        let card1 = new Card(CARD_MARK.SPADE, 1)
+        let card2 = new Card(CARD_MARK.SPADE, 12) 
+        let card3 = new Card(CARD_MARK.HEART, 13)
+        let card4 = new Card(CARD_MARK.CLUB, 10)
+        let card5 = new Card(CARD_MARK.CLUB, 11)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isStraight = roleModule.__get__("isStraight")
+
+         assert.equal(isStraight(hand), true)
+    });
+
+    it("not straight no joker 11 ~ 2", function(){
+        let card1 = new Card(CARD_MARK.SPADE, 12)
+        let card2 = new Card(CARD_MARK.SPADE, 11) 
+        let card3 = new Card(CARD_MARK.HEART, 13)
+        let card4 = new Card(CARD_MARK.CLUB, 1)
+        let card5 = new Card(CARD_MARK.CLUB, 2)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isStraight = roleModule.__get__("isStraight")
+
+         assert.equal(isStraight(hand), false)
+    });
+
+    it("not straight no joker", function(){
+        let card1 = new Card(CARD_MARK.SPADE, 1)
+        let card2 = new Card(CARD_MARK.SPADE, 2) 
+        let card3 = new Card(CARD_MARK.HEART, 13)
+        let card4 = new Card(CARD_MARK.CLUB, 4)
+        let card5 = new Card(CARD_MARK.CLUB, 5)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isStraight = roleModule.__get__("isStraight")
+
+         assert.equal(isStraight(hand), false)
+    });
+
+    it("straight one joker 9 ~ 13", function(){
+        let card1 = new Card(CARD_MARK.SPADE, 10)
+        let card2 = new Card(CARD_MARK.SPADE, 9) 
+        let card3 = new Card(CARD_MARK.HEART, 11)
+        let card4 = new Card(CARD_MARK.CLUB, 13)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isStraight = roleModule.__get__("isStraight")
+
+         assert.equal(isStraight(hand), true)
+    });
+
+    it("straight one joker 10 ~ 12 1", function(){
+        let card1 = new Card(CARD_MARK.SPADE, 12)
+        let card2 = new Card(CARD_MARK.SPADE, 1) 
+        let card3 = new Card(CARD_MARK.HEART, 11)
+        let card4 = new Card(CARD_MARK.CLUB, 10)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isStraight = roleModule.__get__("isStraight")
+
+         assert.equal(isStraight(hand), true)
+    });
+
+    it("not straight one joker 12 ~ 13 1 ~ 2", function(){
+        let card1 = new Card(CARD_MARK.SPADE, 12)
+        let card2 = new Card(CARD_MARK.SPADE, 1) 
+        let card3 = new Card(CARD_MARK.HEART, 13)
+        let card4 = new Card(CARD_MARK.CLUB, 2)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isStraight = roleModule.__get__("isStraight")
+
+         assert.equal(isStraight(hand), false)
+    });
+
+    it("not straight one joker 5 ~ 6 10 ~ 11", function(){
+        let card1 = new Card(CARD_MARK.SPADE, 5)
+        let card2 = new Card(CARD_MARK.SPADE, 6) 
+        let card3 = new Card(CARD_MARK.HEART, 10)
+        let card4 = new Card(CARD_MARK.CLUB, 11)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isStraight = roleModule.__get__("isStraight")
+
+         assert.equal(isStraight(hand), false)
+    });
+
+    it("straight two joker 11 ~ 12 1", function(){
+        let card1 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+        let card2 = new Card(CARD_MARK.SPADE, 12) 
+        let card3 = new Card(CARD_MARK.HEART, 11)
+        let card4 = new Card(CARD_MARK.CLUB, 1)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isStraight = roleModule.__get__("isStraight")
+
+        assert.equal(isStraight(hand), true)
+    });
+
+    it("straight two joker 12 ~ 13 1", function(){
+        let card1 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+        let card2 = new Card(CARD_MARK.SPADE, 12) 
+        let card3 = new Card(CARD_MARK.HEART, 13)
+        let card4 = new Card(CARD_MARK.CLUB, 1)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isStraight = roleModule.__get__("isStraight")
+
+        assert.equal(isStraight(hand), true)
+    });
+
+
+    it("straight two joker 5 ~ 6 8", function(){
+        let card1 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+        let card2 = new Card(CARD_MARK.SPADE, 8) 
+        let card3 = new Card(CARD_MARK.HEART, 5)
+        let card4 = new Card(CARD_MARK.CLUB, 6)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isStraight = roleModule.__get__("isStraight")
+
+        assert.equal(isStraight(hand), true)
+    });
+
+    it("straight two joker 6 ~ 7 10", function(){
+        let card1 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+        let card2 = new Card(CARD_MARK.SPADE, 10) 
+        let card3 = new Card(CARD_MARK.HEART, 6)
+        let card4 = new Card(CARD_MARK.CLUB, 7)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isStraight = roleModule.__get__("isStraight")
+
+        assert.equal(isStraight(hand), true)
+    });
+
+    it("not straight two joker 6 ~ 7 11", function(){
+        let card1 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+        let card2 = new Card(CARD_MARK.SPADE, 11) 
+        let card3 = new Card(CARD_MARK.HEART, 6)
+        let card4 = new Card(CARD_MARK.CLUB, 7)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isStraight = roleModule.__get__("isStraight")
+
+        assert.equal(isStraight(hand), false)
+    });
+
+    it("not straight two joker 10 1 ~ 2", function(){
+        let card1 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+        let card2 = new Card(CARD_MARK.SPADE, 2) 
+        let card3 = new Card(CARD_MARK.HEART, 1)
+        let card4 = new Card(CARD_MARK.CLUB, 10)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isStraight = roleModule.__get__("isStraight")
+
+        assert.equal(isStraight(hand), false)
+    });
+
+
+    it("not straight two joker 1 6 ~ 7", function(){
+        let card1 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+        let card2 = new Card(CARD_MARK.SPADE, 6) 
+        let card3 = new Card(CARD_MARK.HEART, 1)
+        let card4 = new Card(CARD_MARK.CLUB, 7)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isStraight = roleModule.__get__("isStraight")
+
+        assert.equal(isStraight(hand), false)
+    });
+});
+
+/**
  * three card test
  */
 describe("test role two paire", function() {
