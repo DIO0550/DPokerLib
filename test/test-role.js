@@ -9,7 +9,7 @@ var roleModule = rewire("../role.js")
  * full hause test
  */
  describe("test role full hause", function() {
-    it("full hause no joker", function(){
+    it("full hause no joker", function() {
         let card1 = new Card(CARD_MARK.SPADE, 1)
         let card2 = new Card(CARD_MARK.SPADE, 13) 
         let card3 = new Card(CARD_MARK.HEART, 1)
@@ -23,7 +23,7 @@ var roleModule = rewire("../role.js")
          assert.equal(isFullHause(hand), true)
     });
 
-    it("full hause one joker", function(){
+    it("full hause one joker", function() {
         let card1 = new Card(CARD_MARK.SPADE, 6)
         let card2 = new Card(CARD_MARK.SPADE, 13) 
         let card3 = new Card(CARD_MARK.HEART, 6)
@@ -37,7 +37,7 @@ var roleModule = rewire("../role.js")
          assert.equal(isFullHause(hand), true)
     });
 
-    it("not full hause one joker", function(){
+    it("not full hause one joker", function() {
         let card1 = new Card(CARD_MARK.SPADE, 1)
         let card2 = new Card(CARD_MARK.SPADE, 1) 
         let card3 = new Card(CARD_MARK.HEART, 13)
@@ -51,7 +51,7 @@ var roleModule = rewire("../role.js")
          assert.equal(isFullHause(hand), false)
     });
     
-    it("full hause two joker", function(){
+    it("full hause two joker", function() {
         let card1 = new Card(CARD_MARK.SPADE, 10)
         let card2 = new Card(CARD_MARK.DIAMOND, 10) 
         let card3 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
@@ -65,7 +65,7 @@ var roleModule = rewire("../role.js")
          assert.equal(isFullHause(hand), true)
     });
 
-    it("full hause two joker", function(){
+    it("full hause two joker", function() {
         let card1 = new Card(CARD_MARK.SPADE, 9)
         let card2 = new Card(CARD_MARK.DIAMOND, 10) 
         let card3 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
@@ -80,11 +80,103 @@ var roleModule = rewire("../role.js")
     });
 });
 
+
+
+/**
+ * flush test
+ */
+describe("test role flush", function() {
+    it("flush no joker", function() {
+        let card1 = new Card(CARD_MARK.SPADE, 3)
+        let card2 = new Card(CARD_MARK.SPADE, 12) 
+        let card3 = new Card(CARD_MARK.SPADE, 6)
+        let card4 = new Card(CARD_MARK.SPADE, 7)
+        let card5 = new Card(CARD_MARK.SPADE, 10)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isFlush = roleModule.__get__("isFlush")
+
+         assert.equal(isFlush(hand), true)
+    });
+
+    it("not flush no joker", function() {
+        let card1 = new Card(CARD_MARK.SPADE, 3)
+        let card2 = new Card(CARD_MARK.SPADE, 12) 
+        let card3 = new Card(CARD_MARK.HEART, 6)
+        let card4 = new Card(CARD_MARK.SPADE, 7)
+        let card5 = new Card(CARD_MARK.SPADE, 10)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isFlush = roleModule.__get__("isFlush")
+
+         assert.equal(isFlush(hand), false)
+    });
+
+    it("flush one joker", function() {
+        let card1 = new Card(CARD_MARK.HEART, 3)
+        let card2 = new Card(CARD_MARK.HEART, 12) 
+        let card3 = new Card(CARD_MARK.HEART, 11)
+        let card4 = new Card(CARD_MARK.HEART, 4)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isFlush = roleModule.__get__("isFlush")
+
+         assert.equal(isFlush(hand), true)
+    });
+
+    it("not flush one joker", function() {
+        let card1 = new Card(CARD_MARK.HEART, 3)
+        let card2 = new Card(CARD_MARK.SPADE, 12) 
+        let card3 = new Card(CARD_MARK.HEART, 11)
+        let card4 = new Card(CARD_MARK.HEART, 4)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isFlush = roleModule.__get__("isFlush")
+
+         assert.equal(isFlush(hand), false)
+    });
+
+    it("flush two joker", function() {
+        let card1 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+        let card2 = new Card(CARD_MARK.CLUB, 12) 
+        let card3 = new Card(CARD_MARK.CLUB, 11)
+        let card4 = new Card(CARD_MARK.CLUB, 3)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isFlush = roleModule.__get__("isFlush")
+
+        assert.equal(isFlush(hand), true)
+    });
+
+    it("not flush two joker", function() {
+        let card1 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+        let card2 = new Card(CARD_MARK.CLUB, 12) 
+        let card3 = new Card(CARD_MARK.DIAMOND, 11)
+        let card4 = new Card(CARD_MARK.CLUB, 3)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isFlush = roleModule.__get__("isFlush")
+
+        assert.equal(isFlush(hand), false)
+    });
+});
+
+
 /**
  * three card test
  */
 describe("test role three card", function() {
-    it("three card no joker", function(){
+    it("three card no joker", function() {
         let card1 = new Card(CARD_MARK.SPADE, 3)
         let card2 = new Card(CARD_MARK.SPADE, 12) 
         let card3 = new Card(CARD_MARK.HEART, 3)
@@ -98,7 +190,7 @@ describe("test role three card", function() {
          assert.equal(isThreeCard(hand), true)
     });
 
-    it("three card one joker", function(){
+    it("three card one joker", function() {
         let card1 = new Card(CARD_MARK.SPADE, 3)
         let card2 = new Card(CARD_MARK.SPADE, 12) 
         let card3 = new Card(CARD_MARK.HEART, 11)
@@ -112,7 +204,7 @@ describe("test role three card", function() {
          assert.equal(isThreeCard(hand), true)
     });
 
-    it("three card two joker", function(){
+    it("three card two joker", function() {
         let card1 = new Card(CARD_MARK.SPADE, JOKER_CARD_NUMBER)
         let card2 = new Card(CARD_MARK.SPADE, 12) 
         let card3 = new Card(CARD_MARK.HEART, 11)
@@ -131,7 +223,7 @@ describe("test role three card", function() {
  * straighttest
  */
 describe("test role straight", function() {
-    it("straight no joker", function(){
+    it("straight no joker", function() {
         let card1 = new Card(CARD_MARK.SPADE, 3)
         let card2 = new Card(CARD_MARK.SPADE, 4) 
         let card3 = new Card(CARD_MARK.HEART, 7)
@@ -145,7 +237,7 @@ describe("test role straight", function() {
          assert.equal(isStraight(hand), true)
     });
 
-    it("straight no joker 10 ~ 1", function(){
+    it("straight no joker 10 ~ 1", function() {
         let card1 = new Card(CARD_MARK.SPADE, 1)
         let card2 = new Card(CARD_MARK.SPADE, 12) 
         let card3 = new Card(CARD_MARK.HEART, 13)
@@ -159,7 +251,7 @@ describe("test role straight", function() {
          assert.equal(isStraight(hand), true)
     });
 
-    it("not straight no joker 11 ~ 2", function(){
+    it("not straight no joker 11 ~ 2", function() {
         let card1 = new Card(CARD_MARK.SPADE, 12)
         let card2 = new Card(CARD_MARK.SPADE, 11) 
         let card3 = new Card(CARD_MARK.HEART, 13)
@@ -173,7 +265,7 @@ describe("test role straight", function() {
          assert.equal(isStraight(hand), false)
     });
 
-    it("not straight no joker", function(){
+    it("not straight no joker", function() {
         let card1 = new Card(CARD_MARK.SPADE, 1)
         let card2 = new Card(CARD_MARK.SPADE, 2) 
         let card3 = new Card(CARD_MARK.HEART, 13)
@@ -201,7 +293,7 @@ describe("test role straight", function() {
          assert.equal(isStraight(hand), true)
     });
 
-    it("straight one joker 10 ~ 12 1", function(){
+    it("straight one joker 10 ~ 12 1", function() {
         let card1 = new Card(CARD_MARK.SPADE, 12)
         let card2 = new Card(CARD_MARK.SPADE, 1) 
         let card3 = new Card(CARD_MARK.HEART, 11)
@@ -215,7 +307,7 @@ describe("test role straight", function() {
          assert.equal(isStraight(hand), true)
     });
 
-    it("not straight one joker 12 ~ 13 1 ~ 2", function(){
+    it("not straight one joker 12 ~ 13 1 ~ 2", function() {
         let card1 = new Card(CARD_MARK.SPADE, 12)
         let card2 = new Card(CARD_MARK.SPADE, 1) 
         let card3 = new Card(CARD_MARK.HEART, 13)
@@ -229,7 +321,7 @@ describe("test role straight", function() {
          assert.equal(isStraight(hand), false)
     });
 
-    it("not straight one joker 5 ~ 6 10 ~ 11", function(){
+    it("not straight one joker 5 ~ 6 10 ~ 11", function() {
         let card1 = new Card(CARD_MARK.SPADE, 5)
         let card2 = new Card(CARD_MARK.SPADE, 6) 
         let card3 = new Card(CARD_MARK.HEART, 10)
@@ -243,7 +335,7 @@ describe("test role straight", function() {
          assert.equal(isStraight(hand), false)
     });
 
-    it("straight two joker 11 ~ 12 1", function(){
+    it("straight two joker 11 ~ 12 1", function() {
         let card1 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
         let card2 = new Card(CARD_MARK.SPADE, 12) 
         let card3 = new Card(CARD_MARK.HEART, 11)
@@ -257,7 +349,7 @@ describe("test role straight", function() {
         assert.equal(isStraight(hand), true)
     });
 
-    it("straight two joker 12 ~ 13 1", function(){
+    it("straight two joker 12 ~ 13 1", function() {
         let card1 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
         let card2 = new Card(CARD_MARK.SPADE, 12) 
         let card3 = new Card(CARD_MARK.HEART, 13)
@@ -272,7 +364,7 @@ describe("test role straight", function() {
     });
 
 
-    it("straight two joker 5 ~ 6 8", function(){
+    it("straight two joker 5 ~ 6 8", function() {
         let card1 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
         let card2 = new Card(CARD_MARK.SPADE, 8) 
         let card3 = new Card(CARD_MARK.HEART, 5)
@@ -286,7 +378,7 @@ describe("test role straight", function() {
         assert.equal(isStraight(hand), true)
     });
 
-    it("straight two joker 6 ~ 7 10", function(){
+    it("straight two joker 6 ~ 7 10", function() {
         let card1 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
         let card2 = new Card(CARD_MARK.SPADE, 10) 
         let card3 = new Card(CARD_MARK.HEART, 6)
@@ -300,7 +392,7 @@ describe("test role straight", function() {
         assert.equal(isStraight(hand), true)
     });
 
-    it("not straight two joker 6 ~ 7 11", function(){
+    it("not straight two joker 6 ~ 7 11", function() {
         let card1 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
         let card2 = new Card(CARD_MARK.SPADE, 11) 
         let card3 = new Card(CARD_MARK.HEART, 6)
@@ -314,7 +406,7 @@ describe("test role straight", function() {
         assert.equal(isStraight(hand), false)
     });
 
-    it("not straight two joker 10 1 ~ 2", function(){
+    it("not straight two joker 10 1 ~ 2", function() {
         let card1 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
         let card2 = new Card(CARD_MARK.SPADE, 2) 
         let card3 = new Card(CARD_MARK.HEART, 1)
@@ -329,7 +421,7 @@ describe("test role straight", function() {
     });
 
 
-    it("not straight two joker 1 6 ~ 7", function(){
+    it("not straight two joker 1 6 ~ 7", function() {
         let card1 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
         let card2 = new Card(CARD_MARK.SPADE, 6) 
         let card3 = new Card(CARD_MARK.HEART, 1)
@@ -348,7 +440,7 @@ describe("test role straight", function() {
  * three card test
  */
 describe("test role two paire", function() {
-    it("not two paire no joker", function(){
+    it("not two paire no joker", function() {
         let card1 = new Card(CARD_MARK.SPADE, 3)
         let card2 = new Card(CARD_MARK.SPADE, 4) 
         let card3 = new Card(CARD_MARK.HEART, 3)
