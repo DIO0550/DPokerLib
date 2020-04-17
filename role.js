@@ -165,14 +165,12 @@ function isFullHause(hand) {
  * Flush
  */
 function isFlush(hand) {
-    let mark = hand[0]
+    let sortedHand = sortHand(hand)
+    let jcount = jokerCount(hand)
 
-    for (var i = 1; i < HAND_COUNT; i++) {
-        let card = hand[i]
-        if (card.mark == CARD_MARK.JOKER || mark == CARD_MARK.JOKER) {
-            continue
-        }
-
+    let mark = sortedHand[jcount].mark
+    for (var i = jcount; i < HAND_COUNT; i++) {
+        let card = sortedHand[i]
         if (card.mark != mark) {
             return false
         }
