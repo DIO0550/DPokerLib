@@ -1,5 +1,6 @@
 {
-    "version": "0.9.0",
+    "name": "DPokerLib",
+    "version": "0.0.1",
     "devDependencies": {
         "babel-preset-es2015": "^6.24.1",
         "babel-register": "^6.26.0",
