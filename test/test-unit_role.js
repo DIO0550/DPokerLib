@@ -1,9 +1,9 @@
-import { Card, CARD_MARK, JOKER_CARD_NUMBER } from '../card.js'
+import { Card, CARD_MARK, JOKER_CARD_NUMBER } from '../lib/card.js'
 var assert = require('assert');
 var rewire = require('rewire');
 
 // get role module
-var roleModule = rewire("../role.js")
+var roleModule = rewire("../lib/role.js")
 
 /**
  * four card test

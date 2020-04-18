@@ -1,4 +1,4 @@
-import { Card, CARD_MARK, JOKER_CARD_NUMBER } from '../card.js'
+import { Card, CARD_MARK, JOKER_CARD_NUMBER } from '../lib/card.js'
 var assert = require('assert');
 
 describe("card", function() {

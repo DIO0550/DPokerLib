@@ -1,5 +1,5 @@
-import { Deck } from '../deck.js'
-import { CARD_MARK, JOKER_CARD_NUMBER } from '../card.js'
+import { Deck } from '../lib/deck.js'
+import { CARD_MARK, JOKER_CARD_NUMBER } from '../lib/card.js'
 var assert = require('assert');
 
 describe("deck", function() {
@@ -7,7 +7,7 @@ describe("deck", function() {
         var deck = new Deck()
         let length = deck.deckCards.length
         for (var i = 0; i < length; i++) {
-            var card = deck.drawOne()
+            let card = deck.drawOne()
         }
         assert.equal(deck.deckCards.length, 0)
     });
