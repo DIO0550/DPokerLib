@@ -122,6 +122,10 @@ function isFiveCard(hand) {
     let sortedHand = sortHand(hand)
     // joker count 
     let jcount = jokerCount(hand)
+    if (jcount == 0) {
+        return false
+    }
+    
     let num = sortedHand[jcount].number
     for (var i = jcount; i < HAND_COUNT; i++) {
         let card = sortedHand[i];
