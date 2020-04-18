@@ -8,6 +8,130 @@ var roleModule = rewire("../role.js")
 /**
  * four card test
  */
+ describe("test role royal flush", function() {
+    it("royal flush", function() {
+        let card1 = new Card(CARD_MARK.DIAMOND, 1)
+        let card2 = new Card(CARD_MARK.DIAMOND, 13) 
+        let card3 = new Card(CARD_MARK.DIAMOND, 11)
+        let card4 = new Card(CARD_MARK.DIAMOND, 12)
+        let card5 = new Card(CARD_MARK.DIAMOND, 10)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isRoyalFlush = roleModule.__get__("isRoyalFlush")
+
+         assert.equal(isRoyalFlush(hand), true)
+    });
+
+    it("not royal flush no joker", function() {
+        let card1 = new Card(CARD_MARK.DIAMOND, 12)
+        let card2 = new Card(CARD_MARK.DIAMOND, 13) 
+        let card3 = new Card(CARD_MARK.DIAMOND, 10)
+        let card4 = new Card(CARD_MARK.DIAMOND, 11)
+        let card5 = new Card(CARD_MARK.DIAMOND, 9)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isRoyalFlush = roleModule.__get__("isRoyalFlush")
+
+         assert.equal(isRoyalFlush(hand), false)
+    });
+
+    it("not royal flush one joker", function() {
+        let card1 = new Card(CARD_MARK.SPADE, 10)
+        let card2 = new Card(CARD_MARK.SPADE, 11) 
+        let card3 = new Card(CARD_MARK.SPADE, 12)
+        let card4 = new Card(CARD_MARK.SPADE, 13)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isRoyalFlush = roleModule.__get__("isRoyalFlush")
+
+         assert.equal(isRoyalFlush(hand), false)
+    });
+
+    it("not royal flush two joker", function() {
+        let card1 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+        let card2 = new Card(CARD_MARK.DIAMOND, 10) 
+        let card3 = new Card(CARD_MARK.DIAMOND, 13)
+        let card4 = new Card(CARD_MARK.DIAMOND, 12)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isRoyalFlush = roleModule.__get__("isRoyalFlush")
+
+         assert.equal(isRoyalFlush(hand), false)
+    });
+});
+
+
+/**
+ * five card test
+ */
+ describe("test role five card", function() {
+    it("five card one joker", function() {
+        let card1 = new Card(CARD_MARK.SPADE, 7)
+        let card2 = new Card(CARD_MARK.DIAMOND, 7) 
+        let card3 = new Card(CARD_MARK.HEART, 7)
+        let card4 = new Card(CARD_MARK.CLUB, 7)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isFiveCard = roleModule.__get__("isFiveCard")
+
+         assert.equal(isFiveCard(hand), true)
+    });
+
+    it("not five card one joker", function() {
+        let card1 = new Card(CARD_MARK.SPADE, 8)
+        let card2 = new Card(CARD_MARK.DIAMOND, 8) 
+        let card3 = new Card(CARD_MARK.HEART, 8)
+        let card4 = new Card(CARD_MARK.CLUB, 2)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isFiveCard = roleModule.__get__("isFiveCard")
+
+         assert.equal(isFiveCard(hand), false)
+    });
+    
+    it("five card two joker", function() {
+        let card1 = new Card(CARD_MARK.SPADE, 10)
+        let card2 = new Card(CARD_MARK.DIAMOND, 10) 
+        let card3 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+        let card4 = new Card(CARD_MARK.HEART, 10)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isFiveCard = roleModule.__get__("isFiveCard")
+
+         assert.equal(isFiveCard(hand), true)
+    });
+
+    it("not five card two joker", function() {
+        let card1 = new Card(CARD_MARK.SPADE, 11)
+        let card2 = new Card(CARD_MARK.DIAMOND, 10) 
+        let card3 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+        let card4 = new Card(CARD_MARK.HEART, 11)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isFiveCard = roleModule.__get__("isFiveCard")
+
+         assert.equal(isFiveCard(hand), false)
+    });
+});
+
+
+/**
+ * four card test
+ */
  describe("test role four card", function() {
     it("four card no joker", function() {
         let card1 = new Card(CARD_MARK.SPADE, 1)
@@ -261,54 +385,6 @@ describe("test role flush", function() {
     });
 });
 
-
-/**
- * three card test
- */
-describe("test role three card", function() {
-    it("three card no joker", function() {
-        let card1 = new Card(CARD_MARK.SPADE, 3)
-        let card2 = new Card(CARD_MARK.SPADE, 12) 
-        let card3 = new Card(CARD_MARK.HEART, 3)
-        let card4 = new Card(CARD_MARK.CLUB, 3)
-        let card5 = new Card(CARD_MARK.CLUB, 6)
-
-        let hand = [card1, card2, card3, card4, card5]
-
-        var isThreeCard = roleModule.__get__("isThreeCard")
-
-         assert.equal(isThreeCard(hand), true)
-    });
-
-    it("three card one joker", function() {
-        let card1 = new Card(CARD_MARK.SPADE, 3)
-        let card2 = new Card(CARD_MARK.SPADE, 12) 
-        let card3 = new Card(CARD_MARK.HEART, 11)
-        let card4 = new Card(CARD_MARK.CLUB, 3)
-        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
-
-        let hand = [card1, card2, card3, card4, card5]
-
-        var isThreeCard = roleModule.__get__("isThreeCard")
-
-         assert.equal(isThreeCard(hand), true)
-    });
-
-    it("three card two joker", function() {
-        let card1 = new Card(CARD_MARK.SPADE, JOKER_CARD_NUMBER)
-        let card2 = new Card(CARD_MARK.SPADE, 12) 
-        let card3 = new Card(CARD_MARK.HEART, 11)
-        let card4 = new Card(CARD_MARK.CLUB, 3)
-        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
-
-        let hand = [card1, card2, card3, card4, card5]
-
-        var isThreeCard = roleModule.__get__("isThreeCard")
-
-        assert.equal(isThreeCard(hand), true)
-    });
-});
-
 /**
  * straighttest
  */
@@ -529,8 +605,55 @@ describe("test role straight", function() {
 /**
  * three card test
  */
-describe("test role two paire", function() {
-    it("not two paire no joker", function() {
+describe("test role three card", function() {
+    it("three card no joker", function() {
+        let card1 = new Card(CARD_MARK.SPADE, 3)
+        let card2 = new Card(CARD_MARK.SPADE, 12) 
+        let card3 = new Card(CARD_MARK.HEART, 3)
+        let card4 = new Card(CARD_MARK.CLUB, 3)
+        let card5 = new Card(CARD_MARK.CLUB, 6)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isThreeCard = roleModule.__get__("isThreeCard")
+
+         assert.equal(isThreeCard(hand), true)
+    });
+
+    it("three card one joker", function() {
+        let card1 = new Card(CARD_MARK.SPADE, 3)
+        let card2 = new Card(CARD_MARK.SPADE, 12) 
+        let card3 = new Card(CARD_MARK.HEART, 11)
+        let card4 = new Card(CARD_MARK.CLUB, 3)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isThreeCard = roleModule.__get__("isThreeCard")
+
+         assert.equal(isThreeCard(hand), true)
+    });
+
+    it("three card two joker", function() {
+        let card1 = new Card(CARD_MARK.SPADE, JOKER_CARD_NUMBER)
+        let card2 = new Card(CARD_MARK.SPADE, 12) 
+        let card3 = new Card(CARD_MARK.HEART, 11)
+        let card4 = new Card(CARD_MARK.CLUB, 3)
+        let card5 = new Card(CARD_MARK.JOKER, JOKER_CARD_NUMBER)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isThreeCard = roleModule.__get__("isThreeCard")
+
+        assert.equal(isThreeCard(hand), true)
+    });
+});
+
+/**
+ * two pair test
+ */
+describe("test role two pair", function() {
+    it("two pair no joker", function() {
         let card1 = new Card(CARD_MARK.SPADE, 3)
         let card2 = new Card(CARD_MARK.SPADE, 4) 
         let card3 = new Card(CARD_MARK.HEART, 3)
@@ -542,5 +665,52 @@ describe("test role two paire", function() {
         var isTwoPair = roleModule.__get__("isTwoPair")
 
          assert.equal(isTwoPair(hand), true)
+    });
+
+    it("not two pair no joker", function() {
+        let card1 = new Card(CARD_MARK.SPADE, 3)
+        let card2 = new Card(CARD_MARK.SPADE, 5) 
+        let card3 = new Card(CARD_MARK.HEART, 3)
+        let card4 = new Card(CARD_MARK.CLUB, 2)
+        let card5 = new Card(CARD_MARK.CLUB, 4)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isTwoPair = roleModule.__get__("isTwoPair")
+
+         assert.equal(isTwoPair(hand), false)
+    });
+});
+
+/**
+ * one pair test
+ */
+describe("test role one pair", function() {
+    it("one pair no joker", function() {
+        let card1 = new Card(CARD_MARK.SPADE, 3)
+        let card2 = new Card(CARD_MARK.SPADE, 5) 
+        let card3 = new Card(CARD_MARK.HEART, 3)
+        let card4 = new Card(CARD_MARK.CLUB, 2)
+        let card5 = new Card(CARD_MARK.CLUB, 4)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isOnePair = roleModule.__get__("isOnePair")
+
+         assert.equal(isOnePair(hand), true)
+    });
+
+    it("not one pair no joker", function() {
+        let card1 = new Card(CARD_MARK.SPADE, 3)
+        let card2 = new Card(CARD_MARK.SPADE, 5) 
+        let card3 = new Card(CARD_MARK.HEART, 10)
+        let card4 = new Card(CARD_MARK.CLUB, 2)
+        let card5 = new Card(CARD_MARK.CLUB, 9)
+
+        let hand = [card1, card2, card3, card4, card5]
+
+        var isOnePair = roleModule.__get__("isOnePair")
+
+         assert.equal(isOnePair(hand), false)
     });
 });
