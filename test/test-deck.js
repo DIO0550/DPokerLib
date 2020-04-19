@@ -3,7 +3,7 @@ import { CARD_MARK, JOKER_CARD_NUMBER } from '../lib/card.js'
 var assert = require('assert');
 
 describe("deck", function() {
-    it("test drawOne", function(){
+    it("test drawOne", function() {
         var deck = new Deck()
         let length = deck.deckCards.length
         for (var i = 0; i < length; i++) {
@@ -11,8 +11,8 @@ describe("deck", function() {
         }
         assert.equal(deck.deckCards.length, 0)
     });
-
-    it("test spade count", function(){
+    
+    it("test spade count", function() {
         var deck = new Deck()
         let spade = 0
         for (var card of deck.deckCards) {
@@ -23,8 +23,8 @@ describe("deck", function() {
         }
         assert.equal(spade, 13)
     });
-
-    it("test heart count", function(){
+    
+    it("test heart count", function() {
         var deck = new Deck()
         let heart = 0
         for (var card of deck.deckCards) {
@@ -35,8 +35,8 @@ describe("deck", function() {
         }
         assert.equal(heart, 13)
     });
-
-    it("test diamond count", function(){
+    
+    it("test diamond count", function() {
         var deck = new Deck()
         let diamond = 0
         for (var card of deck.deckCards) {
@@ -47,8 +47,8 @@ describe("deck", function() {
         }
         assert.equal(diamond, 13)
     });
-
-    it("test club count", function(){
+    
+    it("test club count", function() {
         var deck = new Deck()
         let club = 0
         for (var card of deck.deckCards) {
@@ -59,8 +59,8 @@ describe("deck", function() {
         }
         assert.equal(club, 13)
     });
-
-    it("test joker count", function(){
+    
+    it("test joker count", function() {
         var deck = new Deck()
         let joker = 0
         let joker_number_count = 0
@@ -68,7 +68,7 @@ describe("deck", function() {
             if (card.number == JOKER_CARD_NUMBER) {
                 joker_number_count++
             }
-
+            
             if (card.mark == CARD_MARK.JOKER) {
                 joker++
             }
@@ -76,8 +76,8 @@ describe("deck", function() {
         assert.equal(joker, 2)
         assert.equal(joker_number_count, 2)
     });
-
-    it("test number 1 count", function(){
+    
+    it("test number 1 count", function() {
         var deck = new Deck()
         let count = 0
         for (var card of deck.deckCards) {
@@ -87,8 +87,8 @@ describe("deck", function() {
         }
         assert.equal(count, 4)
     });
-
-    it("test number 2 count", function(){
+    
+    it("test number 2 count", function() {
         var deck = new Deck()
         let count = 0
         for (var card of deck.deckCards) {
@@ -98,8 +98,8 @@ describe("deck", function() {
         }
         assert.equal(count, 4)
     });
-
-    it("test number 3 count", function(){
+    
+    it("test number 3 count", function() {
         var deck = new Deck()
         let count = 0
         for (var card of deck.deckCards) {
@@ -109,9 +109,9 @@ describe("deck", function() {
         }
         assert.equal(count, 4)
     });
-
-
-    it("test number 4 count", function(){
+    
+    
+    it("test number 4 count", function() {
         var deck = new Deck()
         let count = 0
         for (var card of deck.deckCards) {
@@ -121,8 +121,8 @@ describe("deck", function() {
         }
         assert.equal(count, 4)
     });
-
-    it("test number 5 count", function(){
+    
+    it("test number 5 count", function() {
         var deck = new Deck()
         let count = 0
         for (var card of deck.deckCards) {
@@ -132,7 +132,7 @@ describe("deck", function() {
         }
         assert.equal(count, 4)
     });
-
+    
     it("test number 6 count", function(){
         var deck = new Deck()
         let count = 0
@@ -143,7 +143,7 @@ describe("deck", function() {
         }
         assert.equal(count, 4)
     });
-
+    
     it("test number 7 count", function(){
         var deck = new Deck()
         let count = 0
@@ -154,7 +154,7 @@ describe("deck", function() {
         }
         assert.equal(count, 4)
     });
-
+    
     it("test number 8 count", function(){
         var deck = new Deck()
         let count = 0
@@ -165,7 +165,7 @@ describe("deck", function() {
         }
         assert.equal(count, 4)
     });
-
+    
     it("test number 9 count", function(){
         var deck = new Deck()
         let count = 0
@@ -176,7 +176,7 @@ describe("deck", function() {
         }
         assert.equal(count, 4)
     });
-
+    
     it("test number 10 count", function(){
         var deck = new Deck()
         let count = 0
@@ -187,7 +187,7 @@ describe("deck", function() {
         }
         assert.equal(count, 4)
     });
-
+    
     it("test number 11 count", function(){
         var deck = new Deck()
         let count = 0
@@ -198,7 +198,7 @@ describe("deck", function() {
         }
         assert.equal(count, 4)
     });
-
+    
     it("test number 12 count", function(){
         var deck = new Deck()
         let count = 0
@@ -209,8 +209,8 @@ describe("deck", function() {
         }
         assert.equal(count, 4)
     });
-
-    it("test number 13 count", function(){
+    
+    it("test number 13 count", function() {
         var deck = new Deck()
         let count = 0
         for (var card of deck.deckCards) {
@@ -220,5 +220,5 @@ describe("deck", function() {
         }
         assert.equal(count, 4)
     });
-
+    
 });
