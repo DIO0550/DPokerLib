@@ -42,4 +42,9 @@ describe("DPokerLib", function() {
         assert.equal(typeof DPokerLib.role.ROLE_LIST.ONE_PAIR === 'undefined', false)
         assert.equal(typeof DPokerLib.role.ROLE_LIST.HIGH_CARD === 'undefined', false)
     })
+
+    
+    it("Role role", function() {
+        assert.equal(typeof DPokerLib.role.role() === 'undefined', false)
+    })
 });
