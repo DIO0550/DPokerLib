@@ -1,6 +1,8 @@
 # DPokerLib
 DPokerLib is Poker Library
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/DIO0550/DPokerLib/blob/master/LICENSE)
+
 ## install
 ```
 $ npm install DPokerLib
