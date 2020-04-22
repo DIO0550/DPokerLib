@@ -1,6 +1,6 @@
 {
-    "name": "DPokerLib",
-    "version": "0.0.2",
+    "name": "dpoker-lib",
+    "version": "0.0.3",
     "main": "index.js",
     "license": "MIT",
     "devDependencies": {
