@@ -45,6 +45,6 @@ describe("DPokerLib", function() {
 
     
     it("Role role", function() {
-        assert.equal(typeof DPokerLib.role.role() === 'undefined', false)
+        assert.equal(typeof DPokerLib.role.role === 'undefined', false)
     })
 });
