@@ -1,7 +1,7 @@
 var card = require('./lib/card.js');
 var deck = require('./lib/deck.js');
-var role = require('./lib/role.js');
+var hand = require('./lib/hand.js');
 
 module.exports.card = card
 module.exports.deck = deck
-module.exports.role = role 
+module.exports.hand = hand 
