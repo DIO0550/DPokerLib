@@ -28,23 +28,23 @@ describe("DPokerLib", function() {
     });
     
     
-    it("Role ROLE_LIST", function() {
-        assert.equal(typeof DPokerLib.role.ROLE_LIST === 'undefined', false)
-        assert.equal(typeof DPokerLib.role.ROLE_LIST.ROYAL_FLUSH === 'undefined', false)
-        assert.equal(typeof DPokerLib.role.ROLE_LIST.FIVE_CARD === 'undefined', false)
-        assert.equal(typeof DPokerLib.role.ROLE_LIST.STRATIGHT_FLUSH === 'undefined', false)
-        assert.equal(typeof DPokerLib.role.ROLE_LIST.FOUR_CARD === 'undefined', false)
-        assert.equal(typeof DPokerLib.role.ROLE_LIST.FULL_HAUSE === 'undefined', false)
-        assert.equal(typeof DPokerLib.role.ROLE_LIST.FLUSH === 'undefined', false)
-        assert.equal(typeof DPokerLib.role.ROLE_LIST.STRAIGHT === 'undefined', false)
-        assert.equal(typeof DPokerLib.role.ROLE_LIST.THREE_CARD === 'undefined', false)
-        assert.equal(typeof DPokerLib.role.ROLE_LIST.TWO_PAIR === 'undefined', false)
-        assert.equal(typeof DPokerLib.role.ROLE_LIST.ONE_PAIR === 'undefined', false)
-        assert.equal(typeof DPokerLib.role.ROLE_LIST.HIGH_CARD === 'undefined', false)
+    it("Hnad HAND_LIST", function() {
+        assert.equal(typeof DPokerLib.hand.HAND_LIST === 'undefined', false)
+        assert.equal(typeof DPokerLib.hand.HAND_LIST.ROYAL_FLUSH === 'undefined', false)
+        assert.equal(typeof DPokerLib.hand.HAND_LIST.FIVE_CARD === 'undefined', false)
+        assert.equal(typeof DPokerLib.hand.HAND_LIST.STRATIGHT_FLUSH === 'undefined', false)
+        assert.equal(typeof DPokerLib.hand.HAND_LIST.FOUR_CARD === 'undefined', false)
+        assert.equal(typeof DPokerLib.hand.HAND_LIST.FULL_HAUSE === 'undefined', false)
+        assert.equal(typeof DPokerLib.hand.HAND_LIST.FLUSH === 'undefined', false)
+        assert.equal(typeof DPokerLib.hand.HAND_LIST.STRAIGHT === 'undefined', false)
+        assert.equal(typeof DPokerLib.hand.HAND_LIST.THREE_CARD === 'undefined', false)
+        assert.equal(typeof DPokerLib.hand.HAND_LIST.TWO_PAIR === 'undefined', false)
+        assert.equal(typeof DPokerLib.hand.HAND_LIST.ONE_PAIR === 'undefined', false)
+        assert.equal(typeof DPokerLib.hand.HAND_LIST.HIGH_CARD === 'undefined', false)
     })
 
     
     it("Role role", function() {
-        assert.equal(typeof DPokerLib.role.role === 'undefined', false)
+        assert.equal(typeof DPokerLib.hand.hand === 'undefined', false)
     })
 });
