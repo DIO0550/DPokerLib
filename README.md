@@ -1,7 +1,8 @@
 # DPokerLib
 DPokerLib is Poker Library
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/DIO0550/DPokerLib/blob/master/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/DIO0550/DPokerLib/blob/master/LICENSE) 
+[![npm version](https://badge.fury.io/js/dpoker-lib.svg)](https://badge.fury.io/js/dpoker-lib)
 
 ## install
 ```
@@ -11,13 +12,13 @@ $ npm install DPokerLib
 ## Usage
 ### Create Deck
 ```JS
-var DPokerLib = require('../index.js');
+var DPokerLib = require('dpoker-lib');
 
 let deck = new DPokerLib.deck.Deck()
 ```
 ### Draw One
 ```JS
-var DPokerLib = require('../index.js');
+var DPokerLib = require('dpoker-lib');
 
 let deck = new DPokerLib.deck.Deck()
 let card = deck.drawOne()
@@ -25,7 +26,7 @@ let card = deck.drawOne()
 
 ### Get Card Number
 ```JS
-var DPokerLib = require('../index.js');
+var DPokerLib = require('dpoker-lib');
 
 let deck = new DPokerLib.deck.Deck()
 let card = deck.drawOne()
@@ -34,7 +35,7 @@ let number = card.number
 
 ### Get Card Mark
 ```JS
-var DPokerLib = require('../index.js');
+var DPokerLib = require('dpoker-lib');
 
 let deck = new DPokerLib.deck.Deck()
 let card = deck.drawOne()
@@ -43,7 +44,7 @@ let number = card.mark
 
 ### Check Role
 ```JS
-var DPokerLib = require('../index.js');
+var DPokerLib = require('dpoker-lib');
 
 let deck = new DPokerLib.deck.Deck()
 
@@ -53,8 +54,8 @@ let card3 = deck.drawOne()
 let card4 = deck.drawOne()
 let card5 = deck.drawOne()
 
-let hand = [card1, card2, card3, card4, card5]
-let role = DPokerLib.role.role(hand)
+let handCards = [card1, card2, card3, card4, card5]
+let hand = DPokerLib.hand.hand(handCards)
 ```
 
 ## MARK LIST
@@ -80,60 +81,60 @@ CARD_MARK.JOKER
 ```
 
 
-## Role List
+## Hand List
 ### - Royal Flush
 ```JS
-ROLE_LIST.ROYAL_FLUSH
+HAND_LIST.ROYAL_FLUSH
 ```
 
 ### - Five Card
 ```JS
-ROLE_LIST.FIVE_CARD
+HAND_LIST.FIVE_CARD
 ```
 
 ### - Straight Flush
 ```JS
-ROLE_LIST.STRATIGHT_FLUSH
+HAND_LIST.STRATIGHT_FLUSH
 ```
 
 ### - Four Card
 ```JS
-ROLE_LIST.FOUR_CARD
+HAND_LIST.FOUR_CARD
 ```
 
 ### - Full Hause
 ```JS
-ROLE_LIST.FULL_HAUSE
+HAND_LIST.FULL_HAUSE
 ```
 
 ### - Flush
 ```JS
-ROLE_LIST.FLUSH
+HAND_LIST.FLUSH
 ```
 
 ### - Straight
 ```JS
-ROLE_LIST.STRAIGHT
+HAND_LIST.STRAIGHT
 ```
 
 ### - Three Card
 ```JS
-ROLE_LIST.THREE_CARD
+HAND_LIST.THREE_CARD
 ```
 
 ### - Two Pair
 ```JS
-ROLE_LIST.TWO_PAIR
+HAND_LIST.TWO_PAIR
 ```
 
 ### - One Pair
 ```JS
-ROLE_LIST.ONE_PAIR
+HAND_LIST.ONE_PAIR
 ```
 
 ### - High Card
 ```JS
-ROLE_LIST.HIGH_CARD
+HAND_LIST.HIGH_CARD
 ```
 
 ## LICENSE
