@@ -6,7 +6,7 @@ DPokerLib is Poker Library
 
 ## install
 ```
-$ npm install DPokerLib
+$ npm install dpoker-lib
 ```
 
 ## Usage
